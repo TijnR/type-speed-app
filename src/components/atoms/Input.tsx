@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 interface Props {
   getActiveChar: any
+  backspace: any
 }
 
 const Input = (props: Props, { getActiveChar }: any) => {
@@ -26,7 +27,20 @@ const Input = (props: Props, { getActiveChar }: any) => {
     }
   }
 
-  return <InputS onChange={handleChange} autoFocus value="" />
+  const handleOnKeyDown = (e: any) => {
+    if (e.keyCode === 27 || e.keyCode === 13 || e.keyCode === 8) {
+      props.backspace()
+    }
+  }
+
+  return (
+    <InputS
+      onChange={handleChange}
+      onKeyDown={handleOnKeyDown}
+      autoFocus
+      value=""
+    />
+  )
 }
 
 export default Input

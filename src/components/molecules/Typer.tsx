@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { InputWrapperLeft, InputWrapperRight } from './TyperStyles'
 import Cursor from '../atoms/Cursor'
 import Input from '../atoms/Input'
+import SpanLeft from '../atoms/SpanLeft'
 
 const wordList = [
   'hallo',
@@ -18,28 +19,37 @@ const textRightAlign = {
   textAlign: 'right',
 }
 
+interface UsedWords {
+  text: string
+  wasGood: boolean
+}
+
 interface Props {}
 
 const Typer = (props: Props) => {
   const [activeWord, setActiveWord] = useState('start')
+  const [staticWord, setStaticWord] = useState(activeWord)
   const [usedWord, setUsedWord] = useState('')
 
   const [words, setWords] = useState(wordList)
-  const [usedWords, setUsedWords] = useState<string[]>([])
+  const [correctTyping, setCorrectTyping] = useState(true)
+  const [usedWords, setUsedWords] = useState<UsedWords[]>([])
   const [onWord, setOnWord] = useState(1)
+  const [wrongLetters, setWrongLetters] = useState(0)
 
   console.log(words)
   console.log(activeWord)
+  console.log(staticWord)
 
-  const SpanLeft = styled.span`
-    padding: 0 2px;
-    font-size: 20px;
-    color: grey;
-  `
+  // const SpanLeft = styled.span`
+  //   padding: 0 2px;
+  //   font-size: 20px;
+  //   color: grey;
+  // `
 
   const SpanRight = styled.span`
-    padding: 0 2px;
-    font-size: 20px;
+    padding: 0 3px;
+    font-size: 26px;
     color: #121212;
   `
 
@@ -50,21 +60,43 @@ const Typer = (props: Props) => {
     checkType(char)
   }
 
+  const backSpace = () => {
+    if (wrongLetters > 0) {
+      setUsedWord((prevState) => prevState.slice(0, -1))
+      setWrongLetters((prevState) => prevState - 1)
+    }
+  }
+
+  useEffect(() => {
+    if (wrongLetters === 0) {
+      setCorrectTyping(true)
+    }
+  }, [wrongLetters])
+
   const checkType = (char: string) => {
-    let wrongNumbers = 0
-
-    console.log(usedWord.length)
-
     if (char === ' ' && usedWord.length >= 1) {
       setOnWord(onWord + 1)
 
-      setActiveWord(words[0])
+      console.log('CHECKING IF CORRECT: COMPARE!!')
+      console.log(staticWord)
+      console.log(usedWord)
 
-      setUsedWords((prevState) => {
-        let newArr = prevState
-        newArr.indexOf(usedWord) < 0 && newArr.push(usedWord)
-        return newArr
-      })
+      const isWordCorrect = staticWord === usedWord
+
+      setWrongLetters(0)
+      setCorrectTyping(true)
+      setActiveWord(words[0])
+      setStaticWord(words[0])
+
+      const defaultAddingWord = {
+        text: usedWord,
+        wasGood: isWordCorrect,
+      }
+
+      let newUsedWords = usedWords
+      newUsedWords.push(defaultAddingWord)
+
+      setUsedWords(newUsedWords)
       setUsedWord('')
 
       let newArr = words
@@ -73,37 +105,44 @@ const Typer = (props: Props) => {
       setWords(newArr)
 
       console.log('space')
-    } else if (wrongNumbers === 0 && char !== ' ') {
-      if (char === activeWord[0]) {
+      console.log(usedWords)
+    } else if (char !== ' ') {
+      if (char === activeWord[0] && wrongLetters === 0) {
         setActiveWord((prevState) => prevState.substring(1))
         setUsedWord((prevState) => prevState + char)
         console.log(words)
         console.log('correct')
       } else {
         setUsedWord((prevState) => prevState + char)
-        wrongNumbers++
+        setWrongLetters((prevState) => prevState + 1)
+        setCorrectTyping(false)
         console.log('wrong')
       }
     }
   }
 
   const displayUsedWords = usedWords.map((word, i) => (
-    <SpanLeft key={i}>{word}</SpanLeft>
+    <SpanLeft key={i} correct={word.wasGood}>
+      {word.text}
+    </SpanLeft>
   ))
 
   const displayWords = words.map((word, i) => (
     <SpanRight key={i}>{word}</SpanRight>
   ))
 
-  const displayUsedWord = <SpanLeft key={0}>{usedWord}</SpanLeft>
+  const displayUsedWord = (
+    <SpanLeft key={0} active={true} correct={correctTyping}>
+      {usedWord}
+    </SpanLeft>
+  )
   const displayActiveWord = <SpanRight key={0}>{activeWord}</SpanRight>
 
   console.log(words)
-  console.log(activeWord)
 
   return (
     <>
-      <Input getActiveChar={getActiveChar} />
+      <Input getActiveChar={getActiveChar} backspace={backSpace} />
       <InputWrapperLeft>
         {displayUsedWords}
         {displayUsedWord}
