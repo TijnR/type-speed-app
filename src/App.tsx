@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './speed-type.svg';
 import './App.css';
+import { DefaultLayout } from './DefaultLayout';
 
 function App() {
   return (
     <div className="App">
-    bruh
+      <DefaultLayout/>
     </div>
   );
 }
