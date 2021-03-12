@@ -1,11 +1,12 @@
 .App {
-  height: calc(100vh - 40px);
-  width: calc(100vw - 40px);
-  padding: 20px;
+  height: calc(100vh - 80px);
+  width: calc(100vw - 80px);
+  padding: 30px 40px 50px 40px;
+  background-color: #fbfbfb;
 }
 
 @media only screen and (max-width: 800px) {
-  .App{
-    height: auto; 
+  .App {
+    height: auto;
   }
 }

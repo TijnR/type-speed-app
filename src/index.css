@@ -4,164 +4,169 @@
 }
 
 @font-face {
+  font-family: MerriWeather;
+  src: url(./assets/fonts/Merriweather-Regular.ttf);
+}
+
+@font-face {
   font-family: 'Crossten Book';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Book'), url('./assets/fonts/CrosstenBook.woff') format('woff');
-  }
-  
+  src: local('Crossten Book'),
+    url('./assets/fonts/CrosstenBook.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Book Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Book Italic'), url('./assets/fonts/CrosstenBookItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten Book Italic'),
+    url('./assets/fonts/CrosstenBookItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Thin';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Thin'), url('./assets/fonts/CrosstenThin.woff') format('woff');
-  }
-  
+  src: local('Crossten Thin'),
+    url('./assets/fonts/CrosstenThin.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Thin Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Thin Italic'), url('./assets/fonts/CrosstenThinItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten Thin Italic'),
+    url('./assets/fonts/CrosstenThinItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten ExtraLight';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten ExtraLight'), url('./assets/fonts/CrosstenExtralight.woff') format('woff');
-  }
-  
+  src: local('Crossten ExtraLight'),
+    url('./assets/fonts/CrosstenExtralight.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten ExtraLight Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten ExtraLight Italic'), url('./assets/fonts/CrosstenExtralightItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten ExtraLight Italic'),
+    url('./assets/fonts/CrosstenExtralightItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Light';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Light'), url('./assets/fonts/CrosstenLight.woff') format('woff');
-  }
-  
+  src: local('Crossten Light'),
+    url('./assets/fonts/CrosstenLight.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Light Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Light Italic'), url('./assets/fonts/CrosstenLightItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten Light Italic'),
+    url('./assets/fonts/CrosstenLightItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Medium';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Medium'), url('./assets/fonts/CrosstenMedium.woff') format('woff');
-  }
-  
+  src: local('Crossten Medium'),
+    url('./assets/fonts/CrosstenMedium.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Medium Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Medium Italic'), url('./assets/fonts/CrosstenMediumItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten Medium Italic'),
+    url('./assets/fonts/CrosstenMediumItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten SemiBold';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten SemiBold'), url('./assets/fonts/CrosstenSemiBold.woff') format('woff');
-  }
-  
+  src: local('Crossten SemiBold'),
+    url('./assets/fonts/CrosstenSemiBold.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten SemiBold Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten SemiBold Italic'), url('./assets/fonts/CrosstenSemiBoldItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten SemiBold Italic'),
+    url('./assets/fonts/CrosstenSemiBoldItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Bold';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Bold'), url('./assets/fonts/CrosstenBold.woff') format('woff');
-  }
-  
+  src: local('Crossten Bold'),
+    url('./assets/fonts/CrosstenBold.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Bold Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Bold Italic'), url('./assets/fonts/CrosstenBoldItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten Bold Italic'),
+    url('./assets/fonts/CrosstenBoldItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten ExtraBold';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten ExtraBold'), url('./assets/fonts/CrosstenExtraBold.woff') format('woff');
-  }
-  
+  src: local('Crossten ExtraBold'),
+    url('./assets/fonts/CrosstenExtraBold.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten ExtraBold Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten ExtraBold Italic'), url('./assets/fonts/CrosstenExtraBoldItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten ExtraBold Italic'),
+    url('./assets/fonts/CrosstenExtraBoldItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Black';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Black'), url('./assets/fonts/CrosstenBlack.woff') format('woff');
-  }
-  
+  src: local('Crossten Black'),
+    url('./assets/fonts/CrosstenBlack.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Black Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Black Italic'), url('./assets/fonts/CrosstenBlackItalic.woff') format('woff');
-  }
-  
+  src: local('Crossten Black Italic'),
+    url('./assets/fonts/CrosstenBlackItalic.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Ultra';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Ultra'), url('./assets/fonts/CrosstenUltra.woff') format('woff');
-  }
-  
+  src: local('Crossten Ultra'),
+    url('./assets/fonts/CrosstenUltra.woff') format('woff');
+}
 
-  @font-face {
+@font-face {
   font-family: 'Crossten Ultra Italic';
   font-style: normal;
   font-weight: normal;
-  src: local('Crossten Ultra Italic'), url('./assets/fonts/CrosstenUltraItalic.woff') format('woff');
-  }
-
+  src: local('Crossten Ultra Italic'),
+    url('./assets/fonts/CrosstenUltraItalic.woff') format('woff');
+}
 
 body {
   margin: 0;
@@ -177,9 +182,13 @@ code {
     monospace;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Crossten Black';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Crossten Bold';
   letter-spacing: 0.05rem;
   font-weight: 600;
 }
-

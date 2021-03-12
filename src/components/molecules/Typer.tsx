@@ -1,60 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import { InputWrapperLeft, InputWrapperRight } from './TyperStyles'
+import React, { useState, useEffect, FunctionComponent } from 'react'
+import { InputWrapperLeft, InputWrapperRight, SpanRight } from './TyperStyles'
 import Cursor from '../atoms/Cursor'
 import Input from '../atoms/Input'
 import SpanLeft from '../atoms/SpanLeft'
+import { getSmallerWordList } from '../../randomWordsGenerator'
 
-const wordList = [
-  'hallo',
-  'skurr',
-  'brains',
-  'cheese',
-  'money',
-  'gains',
-  'firetruck',
-]
+const bruh = getSmallerWordList()
 
-const textRightAlign = {
-  textAlign: 'right',
-}
+// const wordList = [
+//   'hallo',
+//   'skurr',
+//   'brains',
+//   'cheese',
+//   'money',
+//   'gains',
+//   'firetruck',
+// ]
 
-interface UsedWords {
+interface OldWord {
   text: string
   wasGood: boolean
 }
 
-interface Props {}
+interface Props {
+  getResult: any
+  startTimer: any
+  isCounting: boolean
+}
 
-const Typer = (props: Props) => {
+const Typer: FunctionComponent<Props> = ({
+  getResult,
+  startTimer,
+  isCounting,
+}) => {
   const [activeWord, setActiveWord] = useState('start')
   const [staticWord, setStaticWord] = useState(activeWord)
   const [usedWord, setUsedWord] = useState('')
+  const [oldWord, setOldWord] = useState<OldWord>()
 
-  const [words, setWords] = useState(wordList)
+  const [words, setWords] = useState(bruh)
   const [correctTyping, setCorrectTyping] = useState(true)
-  const [usedWords, setUsedWords] = useState<UsedWords[]>([])
-  const [onWord, setOnWord] = useState(1)
   const [wrongLetters, setWrongLetters] = useState(0)
-
-  console.log(words)
-  console.log(activeWord)
-  console.log(staticWord)
-
-  // const SpanLeft = styled.span`
-  //   padding: 0 2px;
-  //   font-size: 20px;
-  //   color: grey;
-  // `
-
-  const SpanRight = styled.span`
-    padding: 0 3px;
-    font-size: 26px;
-    color: #121212;
-  `
-
-  // const displayWords: any = words.map((word, i) => <SpanRight key={i}>{word}</SpanRight>)
-  // const displayUsedWords: any = usedWords.map((word, i) => <SpanLeft key={i}>{word}</SpanLeft>)
 
   const getActiveChar = (char: string) => {
     checkType(char)
@@ -68,6 +54,16 @@ const Typer = (props: Props) => {
   }
 
   useEffect(() => {
+    if (!isCounting) {
+      setActiveWord('start')
+      setStaticWord(activeWord)
+      setUsedWord('')
+      setWords(bruh)
+      setCorrectTyping(true)
+    }
+  }, [isCounting])
+
+  useEffect(() => {
     if (wrongLetters === 0) {
       setCorrectTyping(true)
     }
@@ -75,12 +71,6 @@ const Typer = (props: Props) => {
 
   const checkType = (char: string) => {
     if (char === ' ' && usedWord.length >= 1) {
-      setOnWord(onWord + 1)
-
-      console.log('CHECKING IF CORRECT: COMPARE!!')
-      console.log(staticWord)
-      console.log(usedWord)
-
       const isWordCorrect = staticWord === usedWord
 
       setWrongLetters(0)
@@ -93,58 +83,52 @@ const Typer = (props: Props) => {
         wasGood: isWordCorrect,
       }
 
-      let newUsedWords = usedWords
-      newUsedWords.push(defaultAddingWord)
+      setOldWord(defaultAddingWord)
 
-      setUsedWords(newUsedWords)
       setUsedWord('')
 
       let newArr = words
       newArr.shift()
-
       setWords(newArr)
-
-      console.log('space')
-      console.log(usedWords)
+      getResult(isWordCorrect)
     } else if (char !== ' ') {
       if (char === activeWord[0] && wrongLetters === 0) {
         setActiveWord((prevState) => prevState.substring(1))
         setUsedWord((prevState) => prevState + char)
-        console.log(words)
-        console.log('correct')
+        startTimer()
       } else {
         setUsedWord((prevState) => prevState + char)
         setWrongLetters((prevState) => prevState + 1)
         setCorrectTyping(false)
-        console.log('wrong')
       }
     }
   }
 
-  const displayUsedWords = usedWords.map((word, i) => (
-    <SpanLeft key={i} correct={word.wasGood}>
-      {word.text}
+  const displayOldWord = oldWord ? (
+    <SpanLeft key={1} correct={oldWord.wasGood}>
+      {oldWord.text}
     </SpanLeft>
-  ))
+  ) : (
+    ''
+  )
 
-  const displayWords = words.map((word, i) => (
-    <SpanRight key={i}>{word}</SpanRight>
-  ))
+  const displayActiveWord = <SpanRight key={0}>{activeWord}</SpanRight>
 
   const displayUsedWord = (
     <SpanLeft key={0} active={true} correct={correctTyping}>
       {usedWord}
     </SpanLeft>
   )
-  const displayActiveWord = <SpanRight key={0}>{activeWord}</SpanRight>
 
-  console.log(words)
+  const displayWords = words
+    .filter((word, i) => i < 12)
+    .map((word, i) => <SpanRight key={i}>{word}</SpanRight>)
 
   return (
     <>
       <Input getActiveChar={getActiveChar} backspace={backSpace} />
       <InputWrapperLeft>
-        {displayUsedWords}
+        {displayOldWord}
         {displayUsedWord}
         <Cursor />
       </InputWrapperLeft>

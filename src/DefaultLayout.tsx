@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Logo } from './components/atoms/Logo'
 import ScoreBoard from './components/molecules/ScoreBoard'
 import InputContainer from './components/molecules/InputContainer'
+import Stats from './components/molecules/Stats'
+import Module from './components/molecules/Module'
+import SmallPlug from './components/molecules/SmallPlug'
+import TeslaSVG from './components/atoms/TeslaSVG'
 
 const LayoutStyles = styled.div`
   display: grid;
@@ -12,7 +16,7 @@ const LayoutStyles = styled.div`
   grid-template-areas:
     'logo logo scoreboard scoreboard'
     'input input input input'
-    'author highscore stats stats';
+    'author stats stats stats';
 
   div {
     display: flex;
@@ -20,36 +24,41 @@ const LayoutStyles = styled.div`
 
   .logo__container {
     grid-area: logo;
-    border: 1px dashed green;
+    /* border: 1px dashed green; */
   }
 
   .scoreboard__container {
     grid-area: scoreboard;
     justify-content: flex-end;
-    border: 1px dashed blue;
+    /* border: 1px dashed blue; */
   }
 
   .input__container {
+    position: relative;
     grid-area: input;
-    border: 1px dashed steelblue;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* border: 1px dashed steelblue; */
   }
 
   .author__container {
     grid-area: author;
-    border: 1px dashed purple;
+    align-items: flex-end;
+    /* border: 1px dashed purple; */
   }
 
   .highscore__container {
     grid-area: highscore;
-    border: 1px dashed red;
+    /* border: 1px dashed red; */
   }
 
   .stats__container {
     grid-area: stats;
-    border: 1px dashed lime;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    /* border: 1px dashed lime; */
   }
 
   @media only screen and (max-width: 800px) {
@@ -66,8 +75,75 @@ const LayoutStyles = styled.div`
 `
 
 interface Props {}
+interface Score {
+  words: number
+  accuracy: number
+}
 
 export const DefaultLayout = (props: Props) => {
+  const [timer, SetTimer] = useState(60)
+  const [isCounting, setIsCounting] = useState(false)
+  const [totalWords, setTotalWords] = useState(0)
+  const [correctWords, setCorrectWords] = useState(0)
+  const [moduleOpen, setModuleOpen] = useState(false)
+  const [score, setScore] = useState<Score>()
+
+  const getResult = (correct: boolean) => {
+    if (correct) {
+      setCorrectWords((prevState) => prevState + 1)
+    }
+    setTotalWords((prevState) => prevState + 1)
+  }
+
+  const startTimer = () => {
+    if (!moduleOpen) {
+      setIsCounting(true)
+    }
+  }
+
+  useEffect(() => {
+    if (isCounting) {
+      let seconds = timer
+      const Interval = setInterval(() => {
+        seconds--
+        SetTimer(seconds)
+
+        if (seconds === 0) {
+          setModuleOpen(true)
+          setIsCounting(false)
+          clearInterval(Interval)
+        }
+      }, 1000)
+
+      return () => {
+        clearInterval(Interval)
+        console.log('interval done')
+      }
+    }
+  }, [isCounting])
+
+  useEffect(() => {
+    if (moduleOpen) {
+      handleScore()
+    }
+  }, [moduleOpen])
+
+  const resetGame = () => {
+    window.location.reload()
+  }
+
+  const accuracy =
+    totalWords > 0 ? Math.round((correctWords / totalWords) * 100) : 100
+
+  console.log(timer)
+
+  const handleScore = () => {
+    setScore({
+      words: correctWords,
+      accuracy: accuracy,
+    })
+  }
+
   return (
     <LayoutStyles>
       <>
@@ -78,11 +154,27 @@ export const DefaultLayout = (props: Props) => {
           <ScoreBoard />
         </div>
         <div className="input__container">
-          <InputContainer />
+          <TeslaSVG />
+          <InputContainer
+            isCounting={isCounting}
+            startTimer={startTimer}
+            getResult={getResult}
+          />
         </div>
-        <div className="author__container">author</div>
-        <div className="highscore__container">highscore</div>
-        <div className="stats__container">stats</div>
+        <div className="author__container">
+          <SmallPlug />
+        </div>
+        <div className="stats__container">
+          <Stats
+            score={score}
+            time={timer}
+            correctWords={correctWords}
+            accuracy={accuracy}
+          />
+        </div>
+        {score && (
+          <Module score={score} resetGame={resetGame} isOpen={moduleOpen} />
+        )}
       </>
     </LayoutStyles>
   )

@@ -26,6 +26,7 @@ const SpanLeft: FunctionComponent<Props> = ({
   const Span = styled.span`
     padding: 0 3px;
     font-size: 26px;
+    font-family: MerriWeather, serif;
     color: ${getActiveColor()};
     text-decoration: ${correct ? 'none' : 'line-through'};
   `
