@@ -7,6 +7,7 @@ const Tijn = styled.a`
     sans-serif;
   letter-spacing: 0.5em;
   text-decoration: none;
+  color: black;
 
   :visited {
     text-decoration: none;
@@ -21,6 +22,10 @@ const Roozen = styled.div`
   :hover {
     cursor: pointer;
     letter-spacing: 0.3em;
+  }
+
+  @media only screen and (max-width: 800px) {
+    margin-top: 100px;
   }
 `
 

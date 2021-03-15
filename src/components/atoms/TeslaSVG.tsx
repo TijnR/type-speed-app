@@ -15,7 +15,13 @@ const Container = styled.div`
   margin: 0 auto;
 
   svg {
-    width: 500px;
+    width: 35%;
+  }
+
+  @media only screen and (max-width: 800px) {
+    svg {
+      display: none;
+    }
   }
 `
 

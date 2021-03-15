@@ -13,8 +13,8 @@ const Input = (props: Props, { getActiveChar }: any) => {
     right: 0;
     top: 0;
     bottom: 0;
-    width: 100%;
     z-index: 1;
+    width: 100%;
     border: none;
     outline: none;
     background: transparent;
@@ -38,6 +38,7 @@ const Input = (props: Props, { getActiveChar }: any) => {
       onChange={handleChange}
       onKeyDown={handleOnKeyDown}
       autoFocus
+      autoCapitalize="none"
       value=""
     />
   )

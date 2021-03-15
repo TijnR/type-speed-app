@@ -40,6 +40,10 @@ const LayoutStyles = styled.div`
     align-items: center;
     justify-content: center;
     /* border: 1px dashed steelblue; */
+
+    @media only screen and (max-width: 800px) {
+      margin-top: 100px;
+    }
   }
 
   .author__container {
@@ -59,6 +63,10 @@ const LayoutStyles = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     /* border: 1px dashed lime; */
+    @media only screen and (max-width: 800px) {
+      margin-top: 100px;
+      flex-direction: column;
+    }
   }
 
   @media only screen and (max-width: 800px) {
@@ -80,6 +88,12 @@ interface Score {
   accuracy: number
 }
 
+interface ScoreBoardScore {
+  name: string
+  words: number
+  accuracy: number
+}
+
 export const DefaultLayout = (props: Props) => {
   const [timer, SetTimer] = useState(60)
   const [isCounting, setIsCounting] = useState(false)
@@ -87,6 +101,11 @@ export const DefaultLayout = (props: Props) => {
   const [correctWords, setCorrectWords] = useState(0)
   const [moduleOpen, setModuleOpen] = useState(false)
   const [score, setScore] = useState<Score>()
+  const [lowestScoreBoard, setLowestScoreBoard] = useState<ScoreBoardScore>({
+    name: 'unknown',
+    words: 0,
+    accuracy: 0,
+  })
 
   const getResult = (correct: boolean) => {
     if (correct) {
@@ -117,7 +136,6 @@ export const DefaultLayout = (props: Props) => {
 
       return () => {
         clearInterval(Interval)
-        console.log('interval done')
       }
     }
   }, [isCounting])
@@ -135,8 +153,6 @@ export const DefaultLayout = (props: Props) => {
   const accuracy =
     totalWords > 0 ? Math.round((correctWords / totalWords) * 100) : 100
 
-  console.log(timer)
-
   const handleScore = () => {
     setScore({
       words: correctWords,
@@ -151,7 +167,7 @@ export const DefaultLayout = (props: Props) => {
           <Logo />
         </div>
         <div className="scoreboard__container">
-          <ScoreBoard />
+          <ScoreBoard setLowestScoreBoard={setLowestScoreBoard} />
         </div>
         <div className="input__container">
           <TeslaSVG />
@@ -173,7 +189,12 @@ export const DefaultLayout = (props: Props) => {
           />
         </div>
         {score && (
-          <Module score={score} resetGame={resetGame} isOpen={moduleOpen} />
+          <Module
+            lowestScoreBoard={lowestScoreBoard}
+            score={score}
+            resetGame={resetGame}
+            isOpen={moduleOpen}
+          />
         )}
       </>
     </LayoutStyles>

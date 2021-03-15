@@ -6,6 +6,11 @@ const SpacingStats = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media only screen and (max-width: 800px) {
+    order: 1;
+    max-width: 100%;
+  }
 `
 
 const StatDiv = styled.div`
@@ -21,6 +26,13 @@ const HighDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding-right: 30px;
+
+  @media only screen and (max-width: 800px) {
+    order: 2;
+    width: 100%;
+    padding-right: 0;
+    padding-top: 20px;
+  }
 `
 
 const Title = styled.h3`
@@ -29,6 +41,10 @@ const Title = styled.h3`
   margin: 0;
   padding-left: 5px;
   padding-bottom: 20px;
+
+  @media only screen and (max-width: 800px) {
+    font-size: 18px;
+  }
 `
 
 const StatsContainer = styled.div`
@@ -51,6 +67,12 @@ const Stat = styled.span`
   align-self: flex-start;
   width: 120px;
   margin-bottom: -20px;
+
+  @media only screen and (max-width: 800px) {
+    font-size: 40px;
+    width: 80px;
+    margin-bottom: 0px;
+  }
 `
 
 const SmallStat = styled.span`
@@ -91,7 +113,7 @@ let localAccuracy = parseInt(getLocalStorageValue('accuracy'))
 let localTier = getLocalStorageValue('tier')
 
 function getLocalStorageValue(key: string) {
-  let result = localStorage.getItem(key)
+  let result = window.localStorage.getItem(key)
   if (result) {
     return result
   }
@@ -143,9 +165,9 @@ const Stats: FunctionComponent<Props> = (props) => {
           accuracy: score.accuracy,
           tier: tier,
         })
-        localStorage.setItem('words', `${score.words}`)
-        localStorage.setItem('accuracy', `${score.accuracy}`)
-        localStorage.setItem('tier', `${tier}`)
+        window.localStorage.setItem('words', `${score.words}`)
+        window.localStorage.setItem('accuracy', `${score.accuracy}`)
+        window.localStorage.setItem('tier', `${tier}`)
       } else if (
         score.words === highScore.words &&
         score.accuracy > highScore.accuracy
@@ -155,9 +177,9 @@ const Stats: FunctionComponent<Props> = (props) => {
           accuracy: score.accuracy,
           tier: tier,
         })
-        localStorage.setItem('words', `${score.words}`)
-        localStorage.setItem('accuracy', `${score.accuracy}`)
-        localStorage.setItem('tier', `${tier}`)
+        window.localStorage.setItem('words', `${score.words}`)
+        window.localStorage.setItem('accuracy', `${score.accuracy}`)
+        window.localStorage.setItem('tier', `${tier}`)
       }
     }
   }, [score])

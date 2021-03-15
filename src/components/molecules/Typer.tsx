@@ -54,16 +54,6 @@ const Typer: FunctionComponent<Props> = ({
   }
 
   useEffect(() => {
-    if (!isCounting) {
-      setActiveWord('start')
-      setStaticWord(activeWord)
-      setUsedWord('')
-      setWords(bruh)
-      setCorrectTyping(true)
-    }
-  }, [isCounting])
-
-  useEffect(() => {
     if (wrongLetters === 0) {
       setCorrectTyping(true)
     }
