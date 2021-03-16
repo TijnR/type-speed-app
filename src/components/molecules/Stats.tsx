@@ -108,16 +108,16 @@ interface Props {
   score: Score | undefined
 }
 
-let localWords = parseInt(getLocalStorageValue('words'))
-let localAccuracy = parseInt(getLocalStorageValue('accuracy'))
-let localTier = getLocalStorageValue('tier')
+export let localWords = parseInt(getLocalStorageValue('words'))
+export let localAccuracy = parseInt(getLocalStorageValue('accuracy'))
+let localTier = getLocalStorageValue('tier') || 'F'
 
 function getLocalStorageValue(key: string) {
   let result = window.localStorage.getItem(key)
   if (result) {
     return result
   }
-  return ''
+  return '0'
 }
 
 const Stats: FunctionComponent<Props> = (props) => {

@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Button, EscapeButton } from '../atoms/Button'
 import HighscoreForm from './HighscoreForm'
+import { localWords, localAccuracy } from './Stats'
 import firebase from '../../util/firebase'
 import 'firebase/database'
 
@@ -119,7 +120,11 @@ const Module: FunctionComponent<Props> = ({
         setTier('F')
       }
 
-      if (score.words > lowestScoreBoard.words) {
+      if (
+        score.words > lowestScoreBoard.words &&
+        (score.words > localWords ||
+          (score.words === localWords && score.accuracy > localAccuracy))
+      ) {
         setHighScoreFormOpen(true)
       }
     }
