@@ -2,8 +2,8 @@ import React, { FunctionComponent, useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Button, EscapeButton } from '../atoms/Button'
 import HighscoreForm from './HighscoreForm'
-
 import firebase from '../../util/firebase'
+import 'firebase/database'
 
 const ref = firebase.database().ref('leaderboard')
 

@@ -160,6 +160,8 @@ const Stats: FunctionComponent<Props> = (props) => {
       }
 
       if (score.words > highScore.words) {
+        console.log('highscore')
+
         setHighScore({
           words: score.words,
           accuracy: score.accuracy,
@@ -172,6 +174,7 @@ const Stats: FunctionComponent<Props> = (props) => {
         score.words === highScore.words &&
         score.accuracy > highScore.accuracy
       ) {
+        console.log('highscore')
         setHighScore({
           words: score.words,
           accuracy: score.accuracy,
@@ -190,15 +193,17 @@ const Stats: FunctionComponent<Props> = (props) => {
         <StatDiv>
           <Title style={{ padding: 0, paddingBottom: 10 }}>Highscore</Title>
           <Flex>
-            <SmallStat>{highScore.words}</SmallStat>
+            <SmallStat>{highScore.words ? highScore.words : 0}</SmallStat>
             <SmallSpan>Words/min</SmallSpan>
           </Flex>
           <Flex>
-            <SmallStat>{highScore.accuracy}</SmallStat>
+            <SmallStat>
+              {highScore.accuracy ? highScore.accuracy : 100}
+            </SmallStat>
             <SmallSpan>Accuracy</SmallSpan>
           </Flex>
           <Flex>
-            <SmallStat>{highScore.tier}</SmallStat>
+            <SmallStat>{highScore.tier ? highScore.tier : 'F'}</SmallStat>
             <SmallSpan>Tier</SmallSpan>
           </Flex>
         </StatDiv>

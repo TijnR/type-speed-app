@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FunctionComponent } from 'react'
 import styled from 'styled-components'
 import firebase from '../../util/firebase'
+import 'firebase/database'
 
 const ref = firebase.database().ref('leaderboard')
 
@@ -69,7 +70,11 @@ const ScoreBoard: FunctionComponent<Props> = ({ setLowestScoreBoard }) => {
   }, [])
 
   const sortedList = scoreBoard.sort(function (a, b) {
-    return b.words - a.words
+    if (b.words === a.words) {
+      return b.accuracy - a.accuracy
+    } else {
+      return b.words - a.words
+    }
   })
 
   const displayScoreBoard = sortedList?.map((score, i) => {
