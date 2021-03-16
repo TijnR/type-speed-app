@@ -220,7 +220,7 @@ const Stats: FunctionComponent<Props> = (props) => {
           <Title>Speed</Title>
           <StatsContainer>
             <Stat>{correctWords}</Stat>
-            <SmallSpan>Words/min</SmallSpan>
+            <SmallSpan>total</SmallSpan>
           </StatsContainer>
         </StatDiv>
         <StatDiv>

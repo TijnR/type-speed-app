@@ -16,6 +16,18 @@ const InputCon = styled.div`
   height: 110px;
 `
 
+const MobileLabel = styled.span`
+  position: absolute;
+  display: none;
+  color: red;
+  bottom: -50px;
+  text-align: center;
+
+  @media only screen and (max-width: 400px) {
+    display: flex;
+  }
+`
+
 interface Props {
   getResult: any
   startTimer: any
@@ -28,13 +40,18 @@ const InputContainer: FunctionComponent<Props> = ({
   isCounting,
 }) => {
   return (
-    <InputCon>
-      <Typer
-        isCounting={isCounting}
-        startTimer={startTimer}
-        getResult={getResult}
-      />
-    </InputCon>
+    <>
+      <InputCon>
+        <Typer
+          isCounting={isCounting}
+          startTimer={startTimer}
+          getResult={getResult}
+        />
+      </InputCon>
+      <MobileLabel>
+        Application not optimised for mobile, please play on laptop/desktop.
+      </MobileLabel>
+    </>
   )
 }
 
